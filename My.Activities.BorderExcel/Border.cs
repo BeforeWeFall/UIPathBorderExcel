@@ -31,11 +31,11 @@ namespace My.Activities.BorderExcel
 
         [Category("Input")]
         [RequiredArgument]
-        public InArgument<XLBorderStyleValues> StyleBorder { get; set; }
+        public XLBorderStyleValues StyleBorder { get; set; }
 
         [Category("Input")]
         [RequiredArgument]
-        public InArgument<XLColor> Color { get; set; }
+        public System.Drawing.Color Color { get; set; }
 
         [Category("Input")]
         [RequiredArgument]
@@ -52,9 +52,8 @@ namespace My.Activities.BorderExcel
             string sheetName = SheetName.Get(context);
             bool outside = OutsideBorder.Get(context);
             bool inside = InsideBorder.Get(context);
-            XLColor color = Color.Get(context);
-            XLBorderStyleValues border = StyleBorder.Get(context);
-            SetTip(path, sheetName, cell, outside, inside, color, border);
+            XLColor color = XLColor.FromColor(Color);
+            SetTip(path, sheetName, cell, outside, inside, color, StyleBorder);
 
         }
         public void SetTip(string path, string sheetName, string cell, bool outB, bool insideB, XLColor color, XLBorderStyleValues styleB)
